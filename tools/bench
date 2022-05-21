@@ -1,0 +1,6 @@
+#!/bin/sh
+set -e
+./tools/build-release
+cd build/Release/
+./run-benchmarks "$@"
+cd ../../..

@@ -1,0 +1,22 @@
+#!/bin/sh
+set -e
+if [ ! -d build ]; then
+  mkdir build
+fi
+cd build
+if [ ! -d Release ]; then
+  mkdir Release
+fi
+cd Release
+if [ -n "$COMPILER" ]; then
+  echo "COMPILER is defined, use it: CXX=$COMPILER"
+  export CXX=$COMPILER
+fi
+if [ -z "$CXX" ]; then
+  echo "CXX is not set, using clang by default"
+  export CXX=clang++
+fi
+cmake -DCMAKE_BUILD_TYPE=Release ../.. -GNinja
+ninja -v
+./run-tests
+cd ../..

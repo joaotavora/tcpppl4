@@ -1,0 +1,22 @@
+#!/bin/sh
+set -e
+if [ ! -d build ]; then
+  mkdir build
+fi
+cd build
+if [ ! -d Debug ]; then
+  mkdir Debug
+fi
+cd Debug
+if [ -n "$COMPILER" ]; then
+  echo "COMPILER is defined, use it: CXX=$COMPILER"
+  export CXX=$COMPILER
+fi
+if [ -z "$CXX" ]; then
+  export CXX=clang++
+fi
+cmake -DCMAKE_BUILD_TYPE=Debug ../.. -GNinja
+ninja
+./run-tests $@
+cd ../..
+ln -sf build/Debug/compile_commands.json compile_commands.json

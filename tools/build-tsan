@@ -1,0 +1,21 @@
+#!/bin/sh
+set -e
+if [ ! -d build ]; then
+  mkdir build
+fi
+cd build
+if [ ! -d Tsan ]; then
+  mkdir Tsan
+fi
+cd Tsan
+if [ -n "$COMPILER" ]; then
+  echo "COMPILER is defined, use it: CXX=$COMPILER"
+  export CXX=$COMPILER
+fi
+if [ -z "$CXX" ]; then
+  export CXX=clang++
+fi
+cmake -DSANITIZE_THREAD=On ../.. -GNinja
+ninja
+./run-tests
+cd ../..
