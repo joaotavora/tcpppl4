@@ -1,0 +1,16 @@
+#!/bin/sh
+set -e
+if [ ! -d build ]; then
+  mkdir build
+fi
+cd build
+if [ ! -d Exercise ]; then
+  mkdir Exercise
+fi
+cd Exercise
+if [ -z "$CXX" ]; then export CXX=clang++; fi
+
+cmake -DCMAKE_BUILD_TYPE=Release ../.. -GNinja > /dev/null
+ninja
+./$1
+cd ../..
