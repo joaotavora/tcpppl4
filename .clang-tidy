@@ -6,6 +6,7 @@ Checks: >
   -cppcoreguidelines-avoid-magic-numbers,
   readability-*,
   -readability-magic-numbers,
+  -readability-braces-around*,
   performance-*
 WarningsAsErrors: '*'
 HeaderFilterRegex: 'src/.*'

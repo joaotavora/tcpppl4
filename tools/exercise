@@ -12,5 +12,7 @@ if [ -z "$CXX" ]; then export CXX=clang++; fi
 
 cmake -DCMAKE_BUILD_TYPE=Release ../.. -GNinja > /dev/null
 ninja
-./$1
+command=./$1
+shift
+$command $@
 cd ../..
