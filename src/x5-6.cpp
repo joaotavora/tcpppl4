@@ -43,7 +43,7 @@ int main() {
 
   while (true) {
     cout << "Reading a new one\n";
-    cin >> p;
+    cin >> p; 
     if (cin.eof()) break;
     if (cin.fail()) {
       cout << "Oops\n";
