@@ -16,7 +16,8 @@ if [ -z "$CXX" ]; then
   echo "CXX is not set, using clang by default"
   export CXX=clang++
 fi
+conan install --build=missing ../..
 cmake -DCMAKE_BUILD_TYPE=Release ../.. -GNinja
 ninja -v
-./run-tests
+./bin/run-tests
 cd ../..

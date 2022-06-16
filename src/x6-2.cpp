@@ -3,13 +3,14 @@
 
 #include <thread>
 #include <iostream>
-using namespace std; // NOLINT
 
 #ifdef EXERCISE_MAIN
 int main() {
+  using namespace std::literals::chrono_literals;
+
   // https://stackoverflow.com/a/6374525/177259
-  thread t1{[]{while (1) {cout << "Hello\n"; this_thread::sleep_for(1s);}}};
-  thread t2{[]{while (1) {cout << "world\n"; this_thread::sleep_for(1s);}}};
+  std::thread t1{[]{while (true) {std::cout << "Hello\n"; std::this_thread::sleep_for(1s);}}};
+  std::thread t2{[]{while (true) {std::cout << "world\n"; std::this_thread::sleep_for(1s);}}};
   t1.join();
   t2.join();
 }

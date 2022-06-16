@@ -13,9 +13,11 @@ if [ -n "$COMPILER" ]; then
   export CXX=$COMPILER
 fi
 if [ -z "$CXX" ]; then
-  export CXX=clang++
+    export CXX=clang++
 fi
-cmake -DSANITIZE_ADDRESS=On ../.. -GNinja
-ninja
-./run-tests
+export CXXFLAGS="$CXXFLAGS -fsanitize=address"
+conan install --build=missing ../..
+cmake ../.. -GNinja
+ninja -v
+./bin/run-tests
 cd ../..

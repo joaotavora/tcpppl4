@@ -15,8 +15,9 @@ fi
 if [ -z "$CXX" ]; then
   export CXX=clang++
 fi
-cmake -DCMAKE_BUILD_TYPE=Debug ../.. -GNinja
-ninja
-./run-tests $@
+conan install --build=missing ../..
+cmake -DCMAKE_BUILD_TYPE=Debug ../.. -G"Unix Makefiles"
+make
+./bin/run-tests $@
 cd ../..
 ln -sf build/Debug/compile_commands.json compile_commands.json

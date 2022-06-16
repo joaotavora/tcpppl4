@@ -2,14 +2,14 @@
 #include <cstdio>
 
 #ifdef EXERCISE_TESTS
-#include "catch.hpp"
+#include <catch2/catch.hpp>
 TEST_CASE("x7-3"){
   REQUIRE(true);
 }
 #endif
 
 #ifdef EXERCISE_BENCHMARKS
-#include "benchmark/benchmark.h"
+#include <benchmark/benchmark.h>
 static void BM_super_fast(benchmark::State& state)
 {
   for (auto _ : state) {};
